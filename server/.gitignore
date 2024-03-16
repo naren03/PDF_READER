@@ -17,3 +17,10 @@ node_modules/
 
 # macOS files
 .DS_Store
+
+
+# Ignore Python files
+**/*.py
+
+# Ignore the uploads folder and its contents
+**/uploads/

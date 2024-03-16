@@ -21,3 +21,10 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+
+# Ignore Python files
+**/*.py
+
+# Ignore the uploads folder and its contents
+**/uploads/
