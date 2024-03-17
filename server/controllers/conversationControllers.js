@@ -7,6 +7,8 @@ const Conversation = require('../models/conversation');
 const axios = require('axios');
 const FormData = require('form-data');
 
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
+
 // Multer configuration for handling file uploads
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -114,7 +116,7 @@ const deleteFile =async (req, res) => {
       await Conversation.findByIdAndDelete(conversationId);
 
       // Call Flask endpoint to delete folder and files
-        const flaskDeleteEndpoint = `http://127.0.0.1:5000/delete_folder/${conversationId}`;
+        const flaskDeleteEndpoint = `${process.env.LLM_SERVER_IP}/delete_folder/${conversationId}`;
         await axios.delete(flaskDeleteEndpoint);
   
       res.status(200).json({ message: 'PDF deleted successfully' });
@@ -132,7 +134,7 @@ const sendToFlaskServer = async (file) => {
         filename: file.filename
       });
   
-      const response = await axios.post('http://127.0.0.1:5000/upload_pdf', formData, {
+      const response = await axios.post(`${process.env.LLM_SERVER_IP}/upload_pdf`, formData, {
         headers: {
           ...formData.getHeaders()
         }
