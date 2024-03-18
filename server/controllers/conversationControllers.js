@@ -147,6 +147,4 @@ const sendToFlaskServer = async (file) => {
     }
   };
   
-
-
 module.exports = { upload, uploadFile , editFile ,deleteFile};
