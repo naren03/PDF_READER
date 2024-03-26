@@ -147,4 +147,23 @@ const sendToFlaskServer = async (file) => {
     }
   };
   
-module.exports = { upload, uploadFile , editFile ,deleteFile};
+
+  const getAllPdfs = async (req, res) => {
+    try {
+      // Fetch only the name field from all conversations from the database
+      const conversations = await Conversation.find({}, { name: 1 });
+  
+      // Extract names from conversations
+      const names = conversations.map(conversation => conversation.name);
+  
+      // Send the names array as a response
+      res.json({pdfs:names});
+    } catch (error) {
+      // Handle errors
+      console.error('Error fetching conversations:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  }
+  
+
+module.exports = { upload, uploadFile , editFile ,deleteFile, getAllPdfs};

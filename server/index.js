@@ -1,4 +1,6 @@
 const express = require('express');
+const cors = require('cors');
+
 const path = require('path');
 
 const db = require('./connection'); // Import the MongoDB connection file
@@ -11,6 +13,10 @@ app.use(express.urlencoded({ extended: true }));
 const PORT = process.env.PORT || 8080; 
 
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
+
+app.use(cors()); // Enable CORS for all routes
+
+app.use(express.static('uploads'));
 
 
 app.get('/', (req, res) => {
