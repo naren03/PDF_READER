@@ -1,8 +1,8 @@
 import React , {useEffect,useState} from 'react'
 
 import { Flex, Box } from '@chakra-ui/react'
-import FileUpload from './FileUpload'
-import Pdf from './Pdf'
+import FileUpload from './sidebar/FileUpload'
+import Pdf from './sidebar/Pdf'
 
 
 
@@ -41,10 +41,12 @@ const Sidebar = ({setPdfName}) => {
     return (
         <>
           <Flex color='white'  direction="column" gap={2} m={2}  >
+            {/* FILE UPLOAD */}
             <Box w='100%'  height={"15vh"}>
                 <FileUpload fetchData={fetchData}/>
             </Box>
            
+            {/* DISPLAYING ALL PDF NAMES */}
             {pdfs && pdfs.map((pdf, index) => (
                 <Box key={index} w='100%' height={"10vh"} mt={2}>
                     <Pdf name={pdf} setPdfName={setPdfName} />
